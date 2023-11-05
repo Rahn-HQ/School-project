@@ -22,11 +22,7 @@ const userSchema = new mongoose.Schema({
     role : {
         type : ["student" , "teacher" , "administrator"],
         default: "student",
-    },
-    forgotPasswordToken: String,
-    forgotPasswordTokenExpiry: Date,
-    verifyToken: String,
-    verifyTokenExpiry: Date,
+    }
 })
 
 const User = mongoose.models.users || mongoose.model("users", userSchema);

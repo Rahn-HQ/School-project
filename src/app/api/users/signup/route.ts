@@ -8,16 +8,28 @@ connect();
 
 export async function POST(request: NextRequest) {
     try {
-
+        console.log("")
         const reqBody = await request.json();
         const { username, email, password } = reqBody;
         console.log(reqBody);
 
-        //check if username is already exist 
+        //check if email is already exist 
         const user = await User.findOne({ email });
         if (user) {
             return NextResponse.json({
-                error: "User already exists"
+                error: "Email already exists"
+            },
+                {
+                    status: 400
+                }
+            )
+        }
+        
+        //check if user is already exist 
+        const user1 = await User.findOne({ username });
+        if (user1) {
+            return NextResponse.json({
+                error: "user already exists"
             },
                 {
                     status: 400
