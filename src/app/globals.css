@@ -1,3 +1,59 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* :root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+} */
+
+
+
+/* the shadows for the header pic  */
+
+.HeaderPic:before {
+  content: "";
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #202125;
+  background: -moz-linear-gradient(26deg, #202125 0%, rgba(32,33,37,.6) 40%, rgba(32,33,37,0) 60%, rgba(32,33,37,0) 80%, #202125 100%);
+  background: -webkit-linear-gradient(26deg, #202125 0%, rgba(32,33,37,.6) 40%, rgba(32,33,37,0) 60%, rgba(32,33,37,0) 80%, #202125 100%);
+  background: linear-gradient(26deg, #202125 0%, rgba(32,33,37,.6) 40%, rgba(32,33,37,0) 60%, rgba(32,33,37,0) 80%, #202125 100%);
+}
+.HeaderPic:after {
+  content: "";
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #202125;
+  background: -moz-linear-gradient(45deg, #202125 0, rgba(32,33,37,0) 25%, #202125 120%);
+  background: -webkit-linear-gradient(45deg, #202125 0, rgba(32,33,37,0) 25%, #202125 120%);
+  background: linear-gradient(45deg, #202125 0, rgba(32,33,37,0) 25%, #202125 120%);
+  z-index: 2;
+}
