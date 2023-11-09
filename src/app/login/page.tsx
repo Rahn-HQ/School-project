@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -18,7 +18,7 @@ const Login = () => {
       const res = await axios.post("api/users/login", user);
       console.log("LOGIN SUCCESSFUL", res.data);
       toast.success("login successful");
-      router.push("/");
+      router.push(`/${res.data.id}`);
     } catch (error: any) {
       console.log("login failed", error);
       toast.error(error.message);
@@ -26,9 +26,10 @@ const Login = () => {
       setloading(false);
     }
   };
+  const canSave = [...Object.values(user)].every(Boolean);
   return (
     <div>
-     <h1>{ loading ? "Processing" : "LOGIN" }</h1>
+      <h1>{loading ? "Processing" : "LOGIN"}</h1>
       <label htmlFor="email">Email :</label>
       <input
         type="email"
@@ -37,15 +38,19 @@ const Login = () => {
         onChange={(e) => setUser({ ...user, email: e.target.value })}
       />
       <label htmlFor="password">Password :</label>
-      <input 
-      type="password"
-      id = "password"
-      value = {user.password}
-      onChange = {(e) => setUser({ ...user, password: e.target.value })}
-       />
-       <button onClick = {onLogin}>
+      <input
+        type="password"
+        id="password"
+        value={user.password}
+        onChange={(e) => setUser({ ...user, password: e.target.value })}
+      />
+      <button
+        className="disabled:hidden"
+        disabled={!canSave}
+        onClick = {onLogin}
+      >
         Send
-       </button>
+      </button>
     </div>
   );
 };

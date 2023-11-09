@@ -16,15 +16,16 @@ export async function POST(request: NextRequest) {
         //check if email is already exist 
         const user = await User.findOne({ email });
         if (user) {
+            console.log("email exist before");
             return NextResponse.json({
                 error: "Email already exists"
             },
-                {
+            {
                     status: 400
-                }
+            }
             )
         }
-        
+        console.log("Email is not exist before")
         //check if user is already exist 
         const user1 = await User.findOne({ username });
         if (user1) {
@@ -36,7 +37,8 @@ export async function POST(request: NextRequest) {
                 }
             )
         }
-
+        
+        console.log("Username is not exist before")
         // hash password
         const salt = await bcryptjs.genSalt(10);
         const hashPassword = await bcryptjs.hash(password, salt);
@@ -51,7 +53,7 @@ export async function POST(request: NextRequest) {
         );
         const savedUser = await newUser.save();
         console.log(savedUser);
-
+      
         return NextResponse.json(
             {
                 message: "User created successfully",

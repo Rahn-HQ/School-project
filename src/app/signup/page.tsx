@@ -22,6 +22,7 @@ const Signup = () => {
       setLoading(false);
     }
   };
+  const canSave = [...Object.values(user)].every(Boolean);
   return (
     <div>
       <h1>{loading ? "Processing" : "SignUp"}</h1>
@@ -52,7 +53,8 @@ const Signup = () => {
         // keep the user as he is it but change only password
         onChange={(e) => setUser({ ...user, password: e.target.value })}
       />
-      <button onClick={onSignup}>Click</button>
+      <button onClick={onSignup} className="disabled:hidden" 
+        disabled={!canSave}>Click</button>
     </div>
   );
 };

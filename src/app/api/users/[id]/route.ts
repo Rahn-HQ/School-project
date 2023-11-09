@@ -5,7 +5,7 @@ connect()
 export const GET = async ( req : NextRequest ) => {
     const response = NextResponse.json(
         {
-            message: "Login Successful",
+            message: "Login Here Successful",
             success: true,
         }
     );
