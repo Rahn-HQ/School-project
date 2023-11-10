@@ -1,12 +1,11 @@
-import { connect } from "@/dbconfig/dbconfig";
+import connect  from "@/dbconfig/dbconfig";
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
-connect()
 export async function POST(request: NextRequest) {
     try {
-
+        await connect
         const reqBody = await request.json()
         const { email, password } = reqBody;
         console.log(reqBody);
@@ -46,6 +45,7 @@ export async function POST(request: NextRequest) {
         response.cookies.set("token", token, {
             httpOnly: true,
         })
+        
         return response;
 
     } catch (error: any) {
