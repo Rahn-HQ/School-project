@@ -75,7 +75,7 @@ const Footer = () => {
 
         </div>
 
-        <p className=' text-white text-center mt-8 my-14'> <i> San Francisco City Academy is a program of San Francisco City Impact. </i></p>
+        <p className=' text-white text-center mt-8 mb-5'> <i> San Francisco City Academy is a program of San Francisco City Impact. </i></p>
 
      </div>
     

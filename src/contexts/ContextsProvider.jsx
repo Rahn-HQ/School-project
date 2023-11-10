@@ -8,6 +8,8 @@ export const ContextProvider = ({ children }) => {
 
     const [navMenu, setNavMenu] = useState(true);
     const [secondSecOP, setSecondSecOP] = useState(0);
+    const [signUpType, setSignUpType] = useState(0);
+    const [logIn, setLogIn] = useState(false);
 
 
     return (
@@ -18,6 +20,10 @@ export const ContextProvider = ({ children }) => {
             setNavMenu,
             secondSecOP,
             setSecondSecOP,
+            signUpType,
+            setSignUpType,
+            logIn,
+            setLogIn,
              }}>
 
             {children}

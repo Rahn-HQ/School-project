@@ -1,10 +1,17 @@
+"use client"
+
 import React from 'react'
 
 import AccountMenu from './DropDown'
 
 import Link from 'next/link'
 
+import { useStateContext } from '@/contexts/ContextsProvider'
+
 const Navbar = () => {
+
+  const { logIn, setLogIn} = useStateContext()
+
   return (
 
     <div>
@@ -56,9 +63,21 @@ const Navbar = () => {
       </div>   
 
       <div  className=' ml-10 max-md:hidden'>
+      
+      {!logIn?
+     
       <Link href="/login">
+      
        <button className=' bg-white my-auto  text-xl py-3 px-6 rounded font-bold max-lg:text-base transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-110  duration-200'>LOGIN</button>
+      
       </Link>
+      
+      :
+       
+       <button className=' bg-white my-auto  text-base py-1.5 px-2.5 rounded font-medium max-lg:text-base transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-110  duration-200' onClick={() => setLogIn(false)}>LOGOUT</button>
+      
+      }
+      
       </div>
 
       <div  className='md:hidden'>
