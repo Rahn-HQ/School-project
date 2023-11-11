@@ -10,6 +10,7 @@ export const ContextProvider = ({ children }) => {
     const [secondSecOP, setSecondSecOP] = useState(0);
     const [signUpType, setSignUpType] = useState(0);
     const [logIn, setLogIn] = useState(false);
+    const [error, setError] = useState(false);
 
 
     return (
@@ -24,6 +25,8 @@ export const ContextProvider = ({ children }) => {
             setSignUpType,
             logIn,
             setLogIn,
+            error,
+            setError,
              }}>
 
             {children}

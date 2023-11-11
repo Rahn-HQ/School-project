@@ -6,8 +6,11 @@ import { useStateContext } from '@/contexts/ContextsProvider'
 import {AiFillCloseCircle} from 'react-icons/ai'
 import axios from "axios";
 import { useRouter } from 'next/navigation'
+import { Error } from '@/components'
+import {motion ,AnimatePresence} from 'framer-motion'
+
 const Page = () => {
-  const { signUpType, setSignUpType , setLogIn} = useStateContext()
+  const { signUpType, setSignUpType , setLogIn ,error, setError} = useStateContext()
   const [loading , setLoading] = React.useState(false);
   const router = useRouter()
   const {
@@ -45,10 +48,20 @@ const Page = () => {
     }
     reset();
     setLogIn(true)
+
+    // if an error occurred put the following code in action and if u want to display the error message u have it to pass it down inside error component in the text parameter
+
+    // setError(true)
   }
 
   return (
     <div className=' z-[1] relative w-full before:bg-[url("https://i.ibb.co/wK05Txw/tile-background.webp")] before:z-[-1]    before:bg-no-repeat before:bg-cover before:bg-center before:left-0 before:bottom-0 before:right-0 before:top-0	 before:absolute '>
+
+      <AnimatePresence initial={false} wait={true} onExitComplete={() => null}>
+      
+       {error&& <Error text="Error" error={error} handleClose={() => setError(false)}/> }
+
+      </AnimatePresence>
 
       <div className=' py-40 w-[50%] max-lg:py-32 max-lg:w-[80%] max-md:py-20 max-md:w-[90%] mx-auto'>
 
@@ -158,7 +171,7 @@ const Page = () => {
 
               </fieldset>
 
-              <button type='submit' className='bg-[#142738] text-white w-full mt-5 rounded py-3 text-lg font-semibold transition ease-in-out delay-100    hover:scale-105  duration-200'>SignUp</button>
+              <button  type='submit' disabled={isSubmitting}  className='bg-[#142738] text-white w-full mt-5 rounded py-3 text-lg font-semibold transition ease-in-out delay-100    hover:scale-105  duration-200'>SignUp</button>
 
             </div>
 
