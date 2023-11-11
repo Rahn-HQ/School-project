@@ -25,19 +25,25 @@ const Page = () => {
       email  : data.email ,
       password : data.password,
       role : data.studentID ? "student" : "staff"
+    };
+    const userLog = {
+      email  : data.email ,
+      password : data.password,
     }; 
     try {
       setLoading(true);
       const response = await axios.post("/api/users/signup", user);
       console.log("SignUp Success", response.data);
-      router.push("/login");
+      
+      const res = await axios.post("/api/users/login", userLog );
+      console.log("Login Success", res.data);
+      router.push("/");
     } catch (error) {
       console.log("SignUp faile", error.message);
     } finally {
       setLoading(false);
     }
     reset();
-    // u cannot assume him as a login user so pls edit here
     setLogIn(true)
   }
 

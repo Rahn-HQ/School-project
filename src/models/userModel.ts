@@ -43,13 +43,5 @@ userSchema.pre("save", async function (next) {
         throw err;
     }
 });
-//Compare Password 
-userSchema.methods.comparePassword = async function (password) {
-    try {
-        return await bcryptjs.compare(password, this.password);
-    } catch (err) {
-        throw err;
-    }
-};
 const UserModel = models.User || model("User" , userSchema);
 export default UserModel as Model<UserDocument , {} , Methods >;

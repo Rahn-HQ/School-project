@@ -1,24 +1,18 @@
 "use client"
-
 import React from 'react'
-
 import { useForm, SubmitHandler } from "react-hook-form"
-
 import Link from 'next/link'
-
 import { useStateContext } from '@/contexts/ContextsProvider'
-
 import {AiFillCloseCircle} from 'react-icons/ai'
-
+import axios from "axios";
 import { useRouter } from 'next/navigation'
 
 
 const Page = () => {
 
   const { signUpType, setSignUpType , setLogIn } = useStateContext()
-  
+  const [loading , setLoading] = React.useState(false);
   const router = useRouter()
-
   const {
     register,
     handleSubmit,
@@ -28,16 +22,27 @@ const Page = () => {
     getValues,
   } = useForm()
   
-  const onSubmit =(data) =>{
-
-    //here where u send it to the server or data base , console log the "data" to know what is going on
+  const onSubmit = async(data) =>{
     console.log(data)
-    
+    const user = {
+      email : data.email,
+      password : data.password
+    };
+    try {
+      setLoading(true);
+      const res = await axios.post("/api/users/login", user);
+      console.log("Login Success", res.data);
+      setLogIn(true)
+      reset();
+      router.push("/");
+    } catch (error) {
+      console.log("Login faile", error);
+      reset();
+      router.push("/login")
+    } finally {
+      setLoading(false);
+    }
     reset();
-    
-    setLogIn(true)
-
-    router.push("/")
   }
 
   return (
@@ -49,7 +54,7 @@ const Page = () => {
           
           <div className=' text-center mb-10'>
             
-            <h1 className='  text-5xl font-semibold drop-shadow-3xl' >Log In</h1>
+            <h1 className='  text-5xl font-semibold drop-shadow-3xl' >{loading ? "Processing" : "Log In"}</h1>
           
           </div>
 
