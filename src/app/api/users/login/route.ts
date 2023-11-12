@@ -24,7 +24,7 @@ export const POST = async (req: Request): Promise<NewResponse> => {
         const user = await User.findOne({ email })
         if (!user) {
             console.log("Email does not exist please sign up");
-            return NextResponse.json({ error: "Email does not exist please sign up if you do not have an account or try again" }, { status: 400 })
+            return NextResponse.json({ error: "Email does not exist" }, { status: 400 })
         }
         console.log("user exists");
 

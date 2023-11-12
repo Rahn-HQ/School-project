@@ -17,11 +17,19 @@ interface NewUserResponse {
 type NewResponse = NextResponse<{ user?: NewUserResponse, error?: string }>;
 export const POST = async (req: Request): Promise<NewResponse> => {
     const body = (await req.json()) as NewUserRequest;
-    const oldUser = await UserModel.findOne({email : body.email });
-    if ( oldUser ){
-        console.log("User already exists");
+    const oldEmail = await UserModel.findOne({email : body.email });
+    if ( oldEmail ){
+        console.log("Email already exists");
         return NextResponse.json(
           {error : "email is already exist!"},
+          {status : 422 }
+        );
+    }
+    const oldUser = await UserModel.findOne({user : body.username });
+    if ( oldUser ){
+        console.log("Username already exists");
+        return NextResponse.json(
+          {error : "Username is already exist!"},
           {status : 422 }
         );
     }

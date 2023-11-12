@@ -13,6 +13,7 @@ const Page = () => {
 
   const { signUpType, setSignUpType , setLogIn ,error, setError} = useStateContext()
   const [loading , setLoading] = React.useState(false);
+  const [err , setErr] = React.useState("");
   const router = useRouter()
   const {
     register,
@@ -34,21 +35,17 @@ const Page = () => {
       const res = await axios.post("/api/users/login", user);
       console.log("Login Success", res.data);
       setLogIn(true)
+      setErr("");
       reset();
       router.push("/");
     } catch (error) {
-      console.log("Login faile", error);
-      reset();
+      const info = error.response.data.error;
+      setError(true);
+      setErr(info);
       router.push("/login")
     } finally {
       setLoading(false);
     }
-    reset();
-
-    // if an error occurred put the following code in action and if u want to display the error message u have it to pass it down inside error component in the text parameter
-
-    // setError(true)
-
   }
 
   return (
@@ -57,7 +54,7 @@ const Page = () => {
 
       <AnimatePresence initial={false} wait={true} onExitComplete={() => null}>
       
-       {error&& <Error text="Error" error={error} handleClose={() => setError(false)}/> }
+       {error&& <Error text={err} error={error} handleClose={() => setError(false)}/> }
 
       </AnimatePresence>
 

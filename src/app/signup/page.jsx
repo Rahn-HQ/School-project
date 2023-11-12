@@ -12,6 +12,7 @@ import {motion ,AnimatePresence} from 'framer-motion'
 const Page = () => {
   const { signUpType, setSignUpType , setLogIn ,error, setError} = useStateContext()
   const [loading , setLoading] = React.useState(false);
+  const [err , setErr] = React.useState("");
   const router = useRouter()
   const {
     register,
@@ -36,13 +37,14 @@ const Page = () => {
     try {
       setLoading(true);
       const response = await axios.post("/api/users/signup", user);
-      console.log("SignUp Success", response.data);
-      
       const res = await axios.post("/api/users/login", userLog );
-      console.log("Login Success", res.data);
+      setErr("");
       router.push("/");
     } catch (error) {
-      console.log("SignUp faile", error.message);
+      const info = error.response.data.error || "Username used before";
+      setError(true);
+      setErr(info);
+      reset();
     } finally {
       setLoading(false);
     }
@@ -59,7 +61,7 @@ const Page = () => {
 
       <AnimatePresence initial={false} wait={true} onExitComplete={() => null}>
       
-       {error&& <Error text="Error" error={error} handleClose={() => setError(false)}/> }
+       {error&& <Error text={err} error={error} handleClose={() => setError(false)}/> }
 
       </AnimatePresence>
 
