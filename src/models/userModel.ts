@@ -1,16 +1,5 @@
-import { Model, models, model } from "mongoose";
-import { Document, Schema } from "mongoose";
-import bcryptjs from "bcryptjs";
-interface UserDocument extends Document {
-    email: string,
-    username: string,
-    password: string,
-    role: "amdin" | "student" | "staff",
-}
-interface Methods {
-    comparePassword(password: string): Promise<boolean>;
-}
-const userSchema = new Schema<UserDocument, {}, Methods>({
+import mongoose from "mongoose"
+const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
@@ -31,17 +20,5 @@ const userSchema = new Schema<UserDocument, {}, Methods>({
         default: "student"
     }
 });
-//Hash the password before saving
-userSchema.pre("save", async function (next) {
-    if (!this.isModified("password")) return next();
-    try {
-        const salt = await bcryptjs.genSalt(10);
-        this.password = await bcryptjs.hash(this.password, salt);
-        next();
-    }
-    catch (err) {
-        throw err;
-    }
-});
-const UserModel = models.User || model("User" , userSchema);
-export default UserModel as Model<UserDocument , {} , Methods >;
+const User = mongoose.models.users || mongoose.model("users", userSchema);
+export default User;
