@@ -8,7 +8,6 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Error } from "@/components";
 import { motion, AnimatePresence } from "framer-motion";
-
 import { signIn, useSession } from "next-auth/react";
 const Page = () => {
   const { signUpType, setSignUpType, setLogIn, error, setError } =
@@ -39,21 +38,12 @@ const Page = () => {
       password: data.password,
       role: data.studentID ? "student" : "staff",
     };
-    const email = data.email;
-    const password = data.password;
     try {
       setLoading(true);
       const response = await axios.post("/api/users/signup", user);
-      const res = await signIn("credentials", {
-        redirect: false,
-        email,
-        password,
-      });
-      setLogIn(true);
-      setError("");
       setLoading(false);
-      setErr("");
-      router.push("/");
+      setErr("");setError(false);
+      router.push("/login");
     } catch (error) {
       const info = error.response.data.error || "Username used before";
       setError(true);
@@ -63,11 +53,6 @@ const Page = () => {
       setLoading(false);
     }
     reset();
-    setLogIn(true);
-
-    // if an error occurred put the following code in action and if u want to display the error message u have it to pass it down inside error component in the text parameter
-
-    // setError(true)
   };
   if (sessionStatus === "loading") {
     // here u can add some lodaing style
