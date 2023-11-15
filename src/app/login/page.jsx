@@ -29,6 +29,7 @@ const Page = () => {
 
   useEffect(() => {
     if (sessionStatus === "authenticated") {
+      setLogIn(true);
       router.replace("/");
     }
   }, [sessionStatus, router]);
@@ -55,6 +56,7 @@ const Page = () => {
     setLoading(false);
   };
   if (sessionStatus === "loading") {
+    // here u can add some lodaing style
     return <h1>Loading...</h1>;
   }
   return (
