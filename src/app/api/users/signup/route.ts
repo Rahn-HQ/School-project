@@ -1,46 +1,54 @@
-import { NextResponse } from "next/server";
-import startDB   from "@/dbconfig/dbconfig";
-import UserModel from "@/models/userModel";
-startDB;
-interface NewUserRequest {
-    username: string,
-    email: string,
-    password: string,
-    role : string,
-};
-interface NewUserResponse {
-    id: string,
-    username: string,
-    email: string,
-    role: string
+import connect  from '@/dbconfig/dbconfig';
+import User from "@/models/userModel";
+import { NextRequest, NextResponse } from 'next/server';
+import bcryptjs from 'bcryptjs';
+
+connect;
+
+export async function POST(request: NextRequest) {
+    try {
+
+        const reqBody = await request.json();
+        const { username, email, password } = reqBody;
+        console.log(reqBody);
+
+        //check if username is already exist 
+        const user = await User.findOne({ email });
+        if (user) {
+            return NextResponse.json({
+                error: "User already exists"
+            },
+                {
+                    status: 400
+                }
+            )
+        }
+
+        // hash password
+        const salt = await bcryptjs.genSalt(10);
+        const hashPassword = await bcryptjs.hash(password, salt);
+
+        // save in DB 
+        const newUser = new User(
+            {
+                username,
+                email,
+                password: hashPassword,
+            }
+        );
+        const savedUser = await newUser.save();
+        console.log(savedUser);
+
+        return NextResponse.json(
+            {
+                message: "User created successfully",
+                success: true,
+                savedUser
+            }
+        );
+    } catch (error: any) {
+        return NextResponse.json(
+            { error: error.message },
+            { status: 500 });
+    }
 }
-type NewResponse = NextResponse<{ user?: NewUserResponse, error?: string }>;
-export const POST = async (req: Request): Promise<NewResponse> => {
-    const body = (await req.json()) as NewUserRequest;
-    const oldEmail = await UserModel.findOne({email : body.email });
-    if ( oldEmail ){
-        console.log("Email already exists");
-        return NextResponse.json(
-          {error : "email is already exist!"},
-          {status : 422 }
-        );
-    }
-    const oldUser = await UserModel.findOne({user : body.username });
-    if ( oldUser ){
-        console.log("Username already exists");
-        return NextResponse.json(
-          {error : "Username is already exist!"},
-          {status : 422 }
-        );
-    }
-    // create new user
-    const user = await UserModel.create( {...body} );
-    return NextResponse.json({
-        user : {
-            id : user._id.toString(),
-            email : user.email,
-            username : user.username,
-            role : user.role,
-        },
-    })
-};
