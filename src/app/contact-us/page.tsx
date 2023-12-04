@@ -24,7 +24,6 @@ export default function Feedback() {
     });
     const result = await res.json();
     console.log(result);
-    // Navigate to thank you
     router.push(`/thank-you/`);
   };
 

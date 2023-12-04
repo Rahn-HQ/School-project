@@ -45,7 +45,7 @@ const Navbar = () => {
         <div className="flex ">
           <div className="flex max-md:hidden">
             <p className="text-white my-auto font-semibold max-lg:text-sm transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-110  duration-200">
-              <Link href="/about">ABOUT</Link>
+              <Link href="/contact-us">CONTACT-US</Link>
             </p>
 
             <p className="text-white my-auto ml-6 font-semibold max-lg:text-sm transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-110  duration-200">
