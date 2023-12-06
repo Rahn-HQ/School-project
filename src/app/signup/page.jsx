@@ -37,6 +37,8 @@ const Page = () => {
       email: data.email,
       password: data.password,
       role: data.studentID ? "student" : "staff",
+      studentID: data.studentID ? data.studentID : "",
+      staffPassword: data.staffPassword ? data.staffPassword : ""
     };
     try {
       setLoading(true);
@@ -251,15 +253,15 @@ const Page = () => {
                           signUpType === 2 ? "max-h-96 delay-300" : ""
                         } `}
                       >
-                        <p className=" text-lg font-semibold">Staff Password</p>
+                        <p className=" text-lg font-semibold">Staff ID</p>
 
                         <input
-                          type="password"
+                          type="number"
                           {...register("staffPassword", {
-                            required: "Staff Password is required",
+                            required: "Staff Id is required",
                             minLength: {
-                              value: 8,
-                              message: "Password must be at least 8 characters",
+                              value: 4,
+                              message: "Password must be at least 4 numbers",
                             },
                           })}
                           className=" border-[3px]  border-[#aaa] rounded w-full px-2 py-1  outline-none mb-4 transition-colors ease-in-out delay-100  focus:border-blue-600"
