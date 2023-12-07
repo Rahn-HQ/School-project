@@ -32,8 +32,7 @@ const userSchema = new mongoose.Schema({
     },
     result :{
        type : String ,
-       enum: ["success", "failed", "inQueue"],
-       default: "inQueue"
+       enum: ["success", "failed"],
     }
 });
 const User = mongoose.models.secondYear || mongoose.model("secondYear", userSchema);
