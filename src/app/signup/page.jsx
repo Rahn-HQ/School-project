@@ -32,12 +32,15 @@ const Page = () => {
     }
   }, [sessionStatus, router]);
   const onSubmit = async (data) => {
+    
     const user = {
       username: data.firstName + data.lastName,
       email: data.email,
       password: data.password,
       role: data.studentID ? "student" : "staff",
-      studentID: data.studentID ? data.studentID : "",
+      ID: data.studentID ? data.studentID : "",
+      year : data.studentID ? data.studentID.charAt(0) : "",
+      classNum : data.studentID ? data.studentID.charAt(1) : "",
       staffPassword: data.staffPassword ? data.staffPassword : ""
     };
     try {
@@ -215,6 +218,14 @@ const Page = () => {
                           type="number"
                           {...register("studentID", {
                             required: "Student ID is required",
+                            minLength: {
+                              value: 3,
+                              message: "ID must between 3 and 4 numbers",
+                            },
+                            maxLength: {
+                              value: 4,
+                              message: "ID must between 3 and 4 numbers",
+                            }
                           })}
                           className=" border-[3px]  border-[#aaa] rounded w-full px-2 py-1  outline-none mb-4 transition-colors ease-in-out delay-100  focus:border-blue-600"
                         />

@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
     year:{
         type : String,
     },
-    class:{
+    classNum:{
         type : String,
     },
     result :{
