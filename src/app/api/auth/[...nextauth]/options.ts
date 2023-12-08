@@ -14,7 +14,7 @@ export const authOptions : any = {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials: any) {
+      async authorize(credentials : any) {
         await connect;
         try {
           const user = await User.findOne({ email: credentials.email });
@@ -27,7 +27,7 @@ export const authOptions : any = {
               return user;
             }
           }
-        } catch (err: any) {
+        } catch (err : any) {
           throw new Error(err);
         }
       },
@@ -39,6 +39,14 @@ export const authOptions : any = {
     // ...add more providers here
   ],
   callbacks: {
+    async jwt( token : any , user : any ){
+        if ( user ) token.role = user.role;
+        return token
+    },
+    async session(session : any , token : any) {
+       if (session?.user) session.user.role = token.role
+       return session
+    },
     async signIn({ user, account }: { user: AuthUser; account: Account }) {
       if (account?.provider == "credentials") {
         return true;
@@ -56,7 +64,7 @@ export const authOptions : any = {
             return true;
           }
           return true;
-        } catch (err) {
+        } catch (err : any) {
           console.log("Error saving user", err);
           return false;
         }

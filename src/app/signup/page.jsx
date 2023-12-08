@@ -8,7 +8,6 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Error } from "@/components";
 import { motion, AnimatePresence } from "framer-motion";
-import { signIn, useSession } from "next-auth/react";
 const Page = () => {
   const { signUpType, setSignUpType, setLogIn, error, setError } =
     useStateContext();
@@ -23,14 +22,6 @@ const Page = () => {
     reset,
     getValues,
   } = useForm();
-
-  const { data: session, status: sessionStatus } = useSession();
-  useEffect(() => {
-    if (sessionStatus === "authenticated") {
-      setLogIn(true);
-      router.replace("/");
-    }
-  }, [sessionStatus, router]);
   const onSubmit = async (data) => {
     
     const user = {
@@ -38,7 +29,7 @@ const Page = () => {
       email: data.email,
       password: data.password,
       role: data.studentID ? "student" : "staff",
-      ID: data.studentID ? data.studentID : "",
+      ID: data.studentID ? data.studentID : data.staffPassword,
       year : data.studentID ? data.studentID.charAt(0) : "",
       classNum : data.studentID ? data.studentID.charAt(1) : "",
       staffPassword: data.staffPassword ? data.staffPassword : ""

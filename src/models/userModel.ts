@@ -1,6 +1,11 @@
 import mongoose from "mongoose"
 import userInfo from "./userInfoModel"
 const userSchema = new mongoose.Schema({
+    ID : {
+        type: String,
+        required: true,
+        unique: true,
+    },
     email: {
         type: String,
         required: true,

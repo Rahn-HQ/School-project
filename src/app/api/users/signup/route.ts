@@ -102,11 +102,12 @@ export async function POST(request: NextRequest) {
             }
         }
         else {
-
+           // for role staff
         }
         // save in DB 
         const newUser = new User(
             {
+                ID,
                 username,
                 email,
                 password: hashPassword,

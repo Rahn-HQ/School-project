@@ -1,4 +1,0 @@
-please if you clone this project download this in terminal :
-npm install axios bcryptjs jsonwebtoken nodemailer react-hot-toast mongoose
-
-Good Luck!

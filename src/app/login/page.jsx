@@ -8,15 +8,11 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Error } from "@/components";
 import { motion, AnimatePresence } from "framer-motion";
-
-import { signIn, useSession } from "next-auth/react";
 const Page = () => {
   const { signUpType, setSignUpType, setLogIn, error, setError } =
     useStateContext();
   const [loading, setLoading] = React.useState(false);
   const [err, setErr] = React.useState("");
-
-  const { data: session, status: sessionStatus } = useSession();
   const router = useRouter();
   const {
     register,
@@ -26,14 +22,6 @@ const Page = () => {
     reset,
     getValues,
   } = useForm();
-
-  useEffect(() => {
-    if (sessionStatus === "authenticated") {
-      setLogIn(true);
-      router.replace("/");
-    }
-  }, [sessionStatus, router]);
-
   const onSubmit = async (data) => {
     console.log(data);
     const email = data.email;
