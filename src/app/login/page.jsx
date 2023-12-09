@@ -8,12 +8,20 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Error } from "@/components";
 import { motion, AnimatePresence } from "framer-motion";
+import { signIn, useSession } from "next-auth/react";
 const Page = () => {
   const { signUpType, setSignUpType, setLogIn, error, setError } =
     useStateContext();
+  const { data: session, status: sessionStatus } = useSession();
   const [loading, setLoading] = React.useState(false);
   const [err, setErr] = React.useState("");
   const router = useRouter();
+  useEffect(() => {
+    if (sessionStatus === "authenticated") {
+      setLogIn(true);
+      router.replace("/");
+    }
+  }, [sessionStatus, router]);
   const {
     register,
     handleSubmit,
@@ -43,10 +51,6 @@ const Page = () => {
     }
     setLoading(false);
   };
-  if (sessionStatus === "loading") {
-    // here u can add some lodaing style
-    return <h1>Loading...</h1>;
-  }
   return (
     sessionStatus !== "authenticated" && (
       <div className=' z-[1] relative w-full before:bg-[url("https://i.ibb.co/wK05Txw/tile-background.webp")] before:z-[-1]    before:bg-no-repeat before:bg-cover before:bg-center before:left-0 before:bottom-0 before:right-0 before:top-0	 before:absolute '>
