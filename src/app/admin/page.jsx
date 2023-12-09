@@ -4,10 +4,10 @@ import  { authOptions } from '../api/auth/[...nextauth]/route'
 const page = async () => {
   const session =  await getServerSession(authOptions)
   if ( session.user.role !== 'admin' ){
-     return <p>You are not allowed!</p>
+     return <p>Access Denied!</p>
   }
   return <>
-   Page
+   Info about all users
   </>;
 };
 

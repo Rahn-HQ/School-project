@@ -40,11 +40,19 @@ export const authOptions : any = {
   ],
   callbacks: {
     async jwt( token : any , user : any ){
-        if ( user ) token.role = user.role;
+        if ( user ) {
+          token.role = user.role;
+          token.username = user.username;
+          token.ID = user.ID;
+        }
         return token
     },
     async session(session : any , token : any) {
-       if (session?.user) session.user.role = token.role
+       if (session?.user) {
+        session.user.role = token.role
+        session.user.username = token.username
+        session.user.ID = token.ID
+       }
        return session
     },
     async signIn({ user, account }: { user: AuthUser; account: Account }) {
