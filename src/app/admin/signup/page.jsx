@@ -23,31 +23,20 @@ const Page = () => {
     reset,
     getValues,
   } = useForm();
-  const { data: session, status: sessionStatus } = useSession();
-  useEffect(() => {
-    if (sessionStatus === "authenticated") {
-      setLogIn(true);
-      router.replace("/");
-    }
-  }, [sessionStatus, router]);
   const onSubmit = async (data) => {
-    
     const user = {
       username: data.firstName + data.lastName,
       email: data.email,
       password: data.password,
       role: data.studentID ? "student" : "staff",
       ID: data.studentID ? data.studentID : data.staffPassword,
-      year : data.studentID ? data.studentID.charAt(0) : "",
-      classNum : data.studentID ? data.studentID.charAt(1) : "",
-      staffPassword: data.staffPassword ? data.staffPassword : ""
     };
     try {
       setLoading(true);
-      const response = await axios.post("/api/users/signup", user);
+      const response = await axios.post("/../api/users/signup", user);
       setLoading(false);
       setErr("");setError(false);
-      router.push("/login");
+      router.push("/");
     } catch (error) {
       const info = error.response.data.error || "Username used before";
       setError(true);
@@ -58,12 +47,8 @@ const Page = () => {
     }
     reset();
   };
-  if (sessionStatus === "loading") {
-    // here u can add some lodaing style
-    return <h1>Loading...</h1>;
-  }
   return (
-    sessionStatus !== "authenticated" && (
+    true && (
     <div className=' z-[1] relative w-full before:bg-[url("https://i.ibb.co/wK05Txw/tile-background.webp")] before:z-[-1]    before:bg-no-repeat before:bg-cover before:bg-center before:left-0 before:bottom-0 before:right-0 before:top-0	 before:absolute '>
       <AnimatePresence initial={false} wait={true} onExitComplete={() => null}>
         {error && (
@@ -300,17 +285,6 @@ const Page = () => {
               </button>
             </div>
           </form>
-
-          <div className=" text-center  w-full flex justify-center mt-5">
-            <p className=" text-lg font-medium">Already have an account ? </p>
-
-            <Link href="/login">
-              <span className=" text-lg text-blue-600  ml-2  font-bold">
-                {" "}
-                Log In
-              </span>
-            </Link>
-          </div>
         </div>
       </div>
     </div>

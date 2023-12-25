@@ -127,22 +127,6 @@ const Page = () => {
                 </button>
               </div>
             </form>
-
-            <div className=" text-center  w-full flex justify-center mt-5">
-              <p className=" text-lg font-medium">
-                Don&apos;t have an account yet?{" "}
-              </p>
-
-              <Link href="/signup">
-                <span
-                  className=" text-lg text-blue-600  ml-2  font-bold"
-                  onClick={() => setSignUpType(0)}
-                >
-                  {" "}
-                  Sign Up
-                </span>
-              </Link>
-            </div>
           </div>
         </div>
       </div>
