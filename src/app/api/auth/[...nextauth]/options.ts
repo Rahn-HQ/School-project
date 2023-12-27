@@ -4,7 +4,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import User from "@/models/userModel";
 import connect from "@/dbconfig/dbconfig";
-
 export const authOptions : any = {
   providers: [
     CredentialsProvider({
@@ -39,20 +38,25 @@ export const authOptions : any = {
     // ...add more providers here
   ],
   callbacks: {
-    async jwt( token : any , user : any ){
+    async jwt( token : any , user : any  , session : any ){
         if ( user ) {
-          token.role = user.role;
-          token.username = user.username;
-          token.ID = user.ID;
+          return {
+            ...token,
+            ID : user.ID,
+            role : user.role
+          };
         }
         return token
     },
     async session(session : any , token : any) {
-       if (session?.user) {
-        session.user.role = token.role
-        session.user.username = token.username
-        session.user.ID = token.ID
-       }
+       return {
+         ... session,
+         user : {
+          ... session,
+          ID : token.ID,
+          role : token.role
+         }
+       };
        return session
     },
     async signIn({ user, account }: { user: AuthUser; account: Account }) {
@@ -78,5 +82,9 @@ export const authOptions : any = {
         }
       }
     },
+  },
+  secret : process.env.NEXTAUTH_SECRET,
+  session: {
+    strategy : "jwt", 
   },
 };

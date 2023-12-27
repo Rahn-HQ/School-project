@@ -10,6 +10,9 @@ connect;
 function getRandomInt() {
     return Math.floor(Math.random() * 100);
 }
+function getRandomClass() {
+    return Math.floor(Math.random() * 3)%3 + 7;
+}
 export async function POST(request: NextRequest) {
     try {
 
@@ -31,10 +34,52 @@ export async function POST(request: NextRequest) {
         const salt = await bcryptjs.genSalt(10);
         const hashPassword = await bcryptjs.hash(password, salt);
         if (role === "student") {
-            
+            const year = getRandomClass();
+            if ( year === 7 ){
+                const newUser = new FirstClass(
+                    {
+                        ID,
+                        Math : getRandomInt(),
+                        Physics:getRandomInt(),
+                        English:getRandomInt(),
+                        Science:getRandomInt(),
+                        French :getRandomInt(),
+                        History:getRandomInt(),
+                    }
+                );
+                const savedUser = await newUser.save();
+            }
+            if ( year === 8 ){
+                const newUser = new SecondClass(
+                    {
+                        ID,
+                        Math : getRandomInt(),
+                        Physics:getRandomInt(),
+                        English:getRandomInt(),
+                        Science:getRandomInt(),
+                        Arabic :getRandomInt(),
+                        History:getRandomInt(),
+                    }
+                );
+                const savedUser = await newUser.save();
+            }
+            if ( year === 9 ){
+                const newUser = new ThirdClass(
+                    {
+                        ID,
+                        Analysis : getRandomInt(),
+                        Physics:getRandomInt(),
+                        English:getRandomInt(),
+                        Science:getRandomInt(),
+                        Arabic :getRandomInt(),
+                        Algebra:getRandomInt(),
+                    }
+                );
+                const savedUser = await newUser.save();
+            }
         }
         else {
-           // for role staff
+            
         }
         // save in DB 
         const newUser = new User(
