@@ -1,3 +1,4 @@
+"use client";
 import React from 'react'
 
 import {AiOutlineMail , AiOutlineInstagram} from 'react-icons/ai'
@@ -6,7 +7,14 @@ import {BiLogoFacebook} from 'react-icons/bi'
 
 import Link from 'next/link'
 
+import {useStateContext} from '../contexts/ContextsProvider'
+
+
 const Footer = () => {
+
+  const { logIn} = useStateContext()
+
+
   return (
     <div>
     
@@ -48,9 +56,9 @@ const Footer = () => {
             <h2 className=' text-white  '>Quick Links:</h2>
 
             <div className='mt-3'>
-              <Link href="/about">
+              <Link href="/about-us">
               
-                <p className=' hover:text-[#c3e3eb] transition-colors delay-100 hover:border-[#c3e3eb] text-[#F89C23] border-b  border-[#F89C23]'>ABOUT</p>
+                <p className=' hover:text-[#c3e3eb] transition-colors delay-100 hover:border-[#c3e3eb] text-[#F89C23] border-b  border-[#F89C23]'>ABOUT-US</p>
               
               </Link>
               <Link href="/activates">
@@ -68,6 +76,13 @@ const Footer = () => {
                 <p className=' hover:text-[#c3e3eb] transition-colors delay-100 hover:border-[#c3e3eb] text-[#F89C23] border-b border-[#F89C23] mt-5'>LOGIN</p>
               
               </Link>
+              {logIn&&
+               <Link href="/student-profile">
+              
+                <p className=' hover:text-[#c3e3eb] transition-colors delay-100 hover:border-[#c3e3eb] text-[#F89C23] border-b border-[#F89C23] mt-5'>STUDENT-PROFILE</p>
+              
+               </Link>
+              }
 
             </div>
 

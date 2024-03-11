@@ -48,6 +48,11 @@ const Page = () => {
     } else {
       setLogIn(true);
       setError("");
+
+      // added this  so it will redirect if the log in was a success 
+
+      router.replace("/");
+    
     }
     setLoading(false);
   };

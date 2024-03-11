@@ -22,7 +22,7 @@ import Link from 'next/link'
 
 export default function AccountMenu() {
 
-  const { navMenu ,setNavMenu} = useStateContext()
+  const { navMenu ,setNavMenu ,logIn, setLogIn} = useStateContext()
 
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -107,9 +107,9 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <Link href="/about">
+        <Link href="/about-us">
         <MenuItem onClick={handleClose}>
-        <p className='text-black my-auto font-semibold max-lg:text-base'>ABOUT</p>
+        <p className='text-black my-auto font-semibold max-lg:text-base'>ABOUT-US</p>
         </MenuItem>
         </Link>
         <Link href="/activates">
@@ -122,10 +122,20 @@ export default function AccountMenu() {
         <p className='text-black my-auto mt-2 font-semibold max-lg:text-base'>SCHOOL-STAFF</p>
         </MenuItem>
         </Link>
+        {logIn&&
+        
+        <Link href="/student-profile">
+         <MenuItem onClick={handleClose}>
+          <p className='text-black my-auto mt-2 font-semibold max-lg:text-base'>STUDENT-PROFILE</p>
+         </MenuItem>
+        </Link>
+       
+       }
+
         <Divider />
         <Link href="/login">
         <MenuItem onClick={handleClose}>
-        <button className=' bg-[#F89C23] my-auto  w-[300px] text-xl py-3 px-6 rounded font-bold max-lg:text-lg transition ease-in-out delay-150   hover:scale-105  duration-300'>LogIn</button>
+        <button className=' bg-[#F89C23] my-auto  w-[300px] text-xl py-3 px-6 rounded font-bold max-lg:text-lg transition ease-in-out delay-150   hover:scale-105  duration-300' onClick={() => setLogIn(false)}>{logIn?'LogOut':'LogIn'}</button>
         </MenuItem>
         </Link>
         {/* <MenuItem onClick={handleClose}>

@@ -6,12 +6,12 @@ import "../app/globals.css";
 
 import { motion } from "framer-motion";
 
-const Header = () => {
+const Header = ({img , title}) => {
   return (
     <div className="relative">
       <picture className="HeaderPic">
         <img
-          src="https://i.ibb.co/svZ74Kt/pexels-max-fischer-5212331.webp"
+          src={img}
           alt="Landscape picture"
           className=" w-full object-cover max-md:h-[400px] HeaderPic  "
         />
@@ -39,7 +39,7 @@ const Header = () => {
           viewport={{ once: true, amount: 0.25 }}
           className=" text-white text-5xl max-lg:text-3xl lg:font-medium text-center "
         >
-          THE PURSUIT OF EXCELLENCE BEGINS HERE.
+          {title}
         </motion.p>
 
         <picture className=" ">

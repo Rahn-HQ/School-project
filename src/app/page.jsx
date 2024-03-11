@@ -7,7 +7,7 @@ const page = () => {
     <div>
     
 
-      <Header/>
+      <Header img="https://i.ibb.co/svZ74Kt/pexels-max-fischer-5212331.webp" title="THE PURSUIT OF EXCELLENCE BEGINS HERE."/>
 
       <FirstSec/>
 
