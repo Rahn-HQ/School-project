@@ -1,8 +1,5 @@
 import mongoose from "mongoose"
 const userSchema = new mongoose.Schema({
-    ID: {
-        type: String,
-    },
     year:{
         type : String,
     },

@@ -42,8 +42,6 @@ export const authOptions : any = {
         if ( user ) {
           return {
             ...token,
-            ID : user.ID,
-            role : user.role
           };
         }
         return token
@@ -53,8 +51,6 @@ export const authOptions : any = {
          ... session,
          user : {
           ... session,
-          ID : token.ID,
-          role : token.role
          }
        };
        return session

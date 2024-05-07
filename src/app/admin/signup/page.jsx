@@ -28,8 +28,7 @@ const Page = () => {
       username: data.firstName + data.lastName,
       email: data.email,
       password: data.password,
-      role: data.studentID ? "student" : "staff",
-      ID: data.studentID ? data.studentID : data.staffPassword,
+      role: "student",
     };
     try {
       setLoading(true);
