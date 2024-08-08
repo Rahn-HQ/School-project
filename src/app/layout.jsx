@@ -21,7 +21,7 @@ export default async function RootLayout({ children }) {
         href="https://i.ibb.co/cFYDXTW/Screenshot-54-removebg-preview.png"
       />
 
-      <body className={inter.className}>
+      <body className={inter.className} style={{backgroundColor:"#142738"}}>
         <SessionProvider session={session}>
           <ContextProvider>
             <Navbar />
