@@ -62,13 +62,13 @@ const Navbar = () => {
               SCHOOL-STAFF
             </p>
            </Link>
-            {logIn&&
+            {/* {logIn&& */}
            <Link href="/student-profile">
             <p className="text-white my-auto py-3 ml-6 font-semibold max-lg:text-sm transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-110  duration-200">
               STUDENT-PROFILE
             </p>
            </Link>
-          }
+          {/* } */}
 
           </div>
 
