@@ -33,3 +33,35 @@ export const info = [
     Content:"+1 987 654 321"
   }
 ]
+
+export const marksInfo = [
+  {
+    Lable :"Math",
+    Content : "60",
+  },
+  {
+    Lable:"Physics",
+    Content : "60",
+  },
+  {
+    Lable:"English",
+    Content : "60",
+  },
+  {
+    Lable:"Science",
+    Content : "60",
+  },
+  {
+    Lable:"Arabic",
+    Content : "60",
+  },
+  {
+    Lable:"History",
+    Content : "60",
+  },
+
+  {
+    Lable:"Result",
+    Content : "60",
+  }
+]
