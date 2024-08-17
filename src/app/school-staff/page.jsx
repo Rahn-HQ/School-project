@@ -1,11 +1,23 @@
 "use client";
-import React from 'react'
+import React , { useEffect } from 'react'
 import { Header} from '../../components'
 import { StaffInfo} from '../../utils/schoolStaff.js'
 import { motion } from 'framer-motion';
 
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 const Staff = () => {
+
+  const { data: session, status: sessionStatus } = useSession(); 
+  const router = useRouter();   
+  useEffect(() => {
+    if (sessionStatus !== "authenticated") {
+      router.replace("/login");
+    }
+  }, [sessionStatus, router]);
+
   return (
+    sessionStatus === "authenticated" && (
     <div className='bg-gradient-to-br from-[#1D3342] to-[#32536F] pb-5 overflow-x-hidden overflow-y-hidden'>
 
     <div>  
@@ -94,6 +106,7 @@ const Staff = () => {
 
     </div>
   )
-}
+ );
+};
 
 export default Staff
