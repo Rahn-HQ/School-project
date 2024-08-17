@@ -1,11 +1,22 @@
 "use client";
-import React from 'react'
+import React , { useEffect } from 'react'
 import { Header } from '../../components'
 import { info } from '../../utils/studentInfo'
 import { motion } from 'framer-motion';
 
+
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 const Student = () => {
+  const { data: session, status: sessionStatus } = useSession(); 
+  const router = useRouter();   
+  useEffect(() => {
+    if (sessionStatus !== "authenticated") {
+      router.replace("/login");
+    }
+  }, [sessionStatus, router]);
   return (
+    sessionStatus === "authenticated" && (
     <div className='bg-[url("https://www.transparenttextures.com/patterns/45-degree-fabric-dark.png")]
     overflow-x-hidden overflow-y-hidden  bg-white   '>
 
@@ -118,6 +129,7 @@ const Student = () => {
 
     </div>
   )
-}
+ );
+};
 
 export default Student

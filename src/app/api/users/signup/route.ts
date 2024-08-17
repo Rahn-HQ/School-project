@@ -75,9 +75,6 @@ export async function POST(request: NextRequest) {
                 const savedUser = await newUser.save();
             }
         }
-        else {
-            
-        }
         // save in DB 
         const newUser = new User(
             {
