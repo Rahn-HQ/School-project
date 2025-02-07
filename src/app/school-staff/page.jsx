@@ -10,11 +10,11 @@ const Staff = () => {
 
   const { data: session, status: sessionStatus } = useSession(); 
   const router = useRouter();   
-  useEffect(() => {
-    if (sessionStatus !== "authenticated") {
-      router.replace("/login");
-    }
-  }, [sessionStatus, router]);
+  // useEffect(() => {
+  //   if (sessionStatus !== "authenticated") {
+  //     router.replace("/login");
+  //   }
+  // }, [sessionStatus, router]);
 
   return (
     // sessionStatus === "authenticated" && (

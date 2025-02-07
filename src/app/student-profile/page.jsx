@@ -10,11 +10,11 @@ import { useSession } from "next-auth/react";
 const Student = () => {
   const { data: session, status: sessionStatus } = useSession(); 
   const router = useRouter();   
-  useEffect(() => {
-    if (sessionStatus !== "authenticated") {
-      router.replace("/login");
-    }
-  }, [sessionStatus, router]);
+  // useEffect(() => {
+  //   if (sessionStatus !== "authenticated") {
+  //     router.replace("/login");
+  //   }
+  // }, [sessionStatus, router]);
   return (
     // sessionStatus === "authenticated" && (
     <div className='bg-[url("https://www.transparenttextures.com/patterns/45-degree-fabric-dark.png")]
