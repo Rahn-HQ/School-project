@@ -16,7 +16,7 @@ const Student = () => {
     }
   }, [sessionStatus, router]);
   return (
-    sessionStatus === "authenticated" && (
+    // sessionStatus === "authenticated" && (
     <div className='bg-[url("https://www.transparenttextures.com/patterns/45-degree-fabric-dark.png")]
     overflow-x-hidden overflow-y-hidden  bg-white   '>
 
@@ -214,7 +214,7 @@ const Student = () => {
       </motion.div>
     </div>
   )
- );
+//  );
 };
 
 export default Student

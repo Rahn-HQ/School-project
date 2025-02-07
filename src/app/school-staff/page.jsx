@@ -17,7 +17,7 @@ const Staff = () => {
   }, [sessionStatus, router]);
 
   return (
-    sessionStatus === "authenticated" && (
+    // sessionStatus === "authenticated" && (
     <div className='bg-gradient-to-br from-[#1D3342] to-[#32536F] pb-5 overflow-x-hidden overflow-y-hidden'>
 
     <div>  
@@ -106,7 +106,7 @@ const Staff = () => {
 
     </div>
   )
- );
+//  );
 };
 
 export default Staff
