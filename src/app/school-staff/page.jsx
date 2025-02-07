@@ -8,8 +8,8 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 const Staff = () => {
 
-  const { data: session, status: sessionStatus } = useSession(); 
-  const router = useRouter();   
+  // const { data: session, status: sessionStatus } = useSession(); 
+  // const router = useRouter();   
   // useEffect(() => {
   //   if (sessionStatus !== "authenticated") {
   //     router.replace("/login");
